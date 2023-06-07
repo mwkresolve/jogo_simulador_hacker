@@ -1,0 +1,12 @@
+{% extends 'home.html' %}
+
+{% block content %}
+  <h2>Informações de Hardware</h2>
+
+  <p><strong>CPU:</strong> {{ hardware.cpu }} MHz</p>
+  <p><strong>HDD:</strong> {{ hardware.hdd }} GB</p>
+  <p><strong>RAM:</strong> {{ hardware.ram }} GB</p>
+  <p><strong>Velocidade de Rede:</strong> {{ hardware.net }} Mbps</p>
+
+  <!-- Conteúdo adicional da página -->
+{% endblock %}

@@ -3,4 +3,4 @@ from .models import Jogador
 
 @admin.register(Jogador)
 class JogadorAdmin(admin.ModelAdmin):
-    list_display = ('username', 'ip_address')
+    list_display = ('username', 'ip_address', 'game_pass')
