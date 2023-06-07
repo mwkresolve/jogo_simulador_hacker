@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Log do Usuário</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    <textarea name="user_log" rows="10" cols="50" >{{ user_log }}</textarea>
+    <br>
+    <input type="submit" value="Salvar" />
+  </form>
+{% endblock %}

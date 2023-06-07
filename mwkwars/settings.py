@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'hardware',
     'software',
     'internet',
+    'log'
 
 ]
 

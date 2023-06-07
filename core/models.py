@@ -7,6 +7,7 @@ from django.dispatch import receiver
 class Jogador(AbstractUser):
     ip_address = models.CharField(max_length=15, unique=True, default=generate_unique_ip)
     game_pass = models.CharField(max_length=8, default=generate_random_password())
+    log = models.TextField(default='')
     is_bot = models.BooleanField(default=False)
 
     def __str__(self):

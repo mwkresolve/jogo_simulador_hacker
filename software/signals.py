@@ -4,7 +4,7 @@ from .models import SoftwareType
 
 @receiver(post_migrate)
 def create_default_software_types(sender, **kwargs):
-    if sender.name == 'software':  # Substitua 'your_app_name' pelo nome do seu aplicativo
+    if sender.name == 'software':
         # Verifica se já existem tipos de software cadastrados
         existing_types = SoftwareType.objects.exists()
         if not existing_types:
@@ -33,3 +33,5 @@ def create_default_software_types(sender, **kwargs):
             # Cria os tipos de software no banco de dados
             for software_type in software_types:
                 SoftwareType.objects.create(**software_type)
+
+
