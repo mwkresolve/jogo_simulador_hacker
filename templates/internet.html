@@ -1,0 +1,12 @@
+<!-- search_ip.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Buscar IP</h2>
+  <form method="GET" action="">
+    {% csrf_token %}
+    <input type="text" name="ip" placeholder="Digite o IP">
+    <button type="submit">Buscar</button>
+  </form>
+{% endblock %}

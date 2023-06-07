@@ -23,5 +23,6 @@ urlpatterns = [
     path('', include('core.urls')),
     path('hardware/', include('hardware.urls')),
     path('software/', include('software.urls')),
+    path('internet/', include('internet.urls')),
 
 ]

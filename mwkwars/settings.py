@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'core',
     'hardware',
     'software',
+    'internet',
 
 ]
 
