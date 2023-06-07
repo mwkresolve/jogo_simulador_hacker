@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     #app game
     'core',
-    'hardware'
+    'hardware',
+    'software',
 
 ]
 

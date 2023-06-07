@@ -7,3 +7,4 @@ from hardware.models import Hardware
 def create_hardware(sender, instance, created, **kwargs):
     if created:
         Hardware.objects.create(user=instance)
+

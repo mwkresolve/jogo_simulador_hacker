@@ -1,0 +1,35 @@
+<!-- templates/software.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Lista de Softwares</h1>
+
+{% if user_softwares %}
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Tipo de Software</th>
+        <th>Versão</th>
+        <th>Tamanho</th>
+        <th>RAM</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for software in user_softwares %}
+        <tr>
+          <td>{{ software.soft_name }}</td>
+          <td>{{ software.type_of_software }}</td>
+          <td>{{ software.soft_version }}</td>
+          <td>{{ software.soft_size }}</td>
+          <td>{{ software.soft_ram }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>Nenhum software encontrado.</p>
+{% endif %}
+
+{% endblock %}
