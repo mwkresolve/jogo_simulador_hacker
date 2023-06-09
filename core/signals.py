@@ -24,7 +24,7 @@ def create_bots(sender, **kwargs):
     if sender.name == 'core':
         if not Jogador.objects.filter(is_bot=True).exists():
             bot_names = [
-                'ShadowMaster', 'BlackHatElite', 'CryptoPhantom', 'CyberNinja', 'DarkWebWarrior',
+                'ZeroGuy', 'BlackHatElite', 'CryptoPhantom', 'CyberNinja', 'DarkWebWarrior',
                 'HackerKingpin', 'PhantomGhost', 'CrypticByte', 'StealthViper', 'CyberMatrix',
                 'DarkByte', 'ShadowHacker', 'CryptoGhost', 'CyberPhantom', 'BlackHatMatrix',
                 'DarkNinja', 'PhantomByte', 'StealthMatrix', 'CryptoViper', 'HackerGhost',
@@ -33,4 +33,6 @@ def create_bots(sender, **kwargs):
             ]
 
             for name in bot_names:
+                if name == 'mwk':
+                    Jogador.objects.create(username=name, is_bot=True, ip_address='0.0.0.0')
                 Jogador.objects.create(username=name, is_bot=True)

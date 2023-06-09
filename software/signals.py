@@ -1,6 +1,8 @@
 from django.db.models.signals import post_migrate
 from django.dispatch import receiver
-from .models import SoftwareType
+from .models import SoftwareType, Software
+from core.models import Jogador
+from .utils import get_software_name
 
 @receiver(post_migrate)
 def create_default_software_types(sender, **kwargs):
@@ -28,10 +30,56 @@ def create_default_software_types(sender, **kwargs):
                 {'type_id': '16', 'description': 'Analyzer'},
                 {'type_id': '17', 'description': 'Torrent'},
                 {'type_id': '20', 'description': 'Miner'},
+
             ]
 
             # Cria os tipos de software no banco de dados
             for software_type in software_types:
                 SoftwareType.objects.create(**software_type)
+
+@receiver(post_migrate)
+def create_bot_softwares(sender, **kwargs):
+    if sender.name == 'software':
+        # Verifica se existem bots com o nome "zeroguy"
+        if Jogador.objects.filter(username='ZeroGuy', is_bot=True).exists():
+            # Obtém o bot "zeroguy"
+            zeroguy = Jogador.objects.get(username='ZeroGuy', is_bot=True)
+
+            # Cria os softwares para o bot "zeroguy"
+            software_types = SoftwareType.objects.all()
+
+            for software_type in software_types:
+                Software.objects.create(user=zeroguy,
+                                        soft_name='Baby',
+                                        type_of_software=software_type,
+                                        soft_version=1,
+                                        soft_size = 100,
+                                        soft_ram = 10)
+
+        # Obtém todos os bots, excluindo o bot "zeroguy"
+        bots = Jogador.objects.filter(is_bot=True).exclude(username='ZeroGuy')
+
+        # Obtém as instâncias dos tipos de software
+        cracker_type = SoftwareType.objects.get(type_id=1)  # ID do tipo de software "Cracker"
+        hasher_type = SoftwareType.objects.get(type_id=2)  # ID do tipo de software "Hasher"
+
+        # Cria os softwares "Cracker" e "Hasher" em ordem crescente de versão
+        cracker_version = 2
+        hasher_version = 1
+        # Define os valores iniciais para soft_size e soft_ram
+        soft_size = 100
+        soft_ram = 10
+
+
+        for bot in bots:
+            Software.objects.create(user=bot, soft_name=get_software_name(cracker_version), type_of_software=cracker_type, soft_version=cracker_version,
+                                    soft_size=soft_size, soft_ram=soft_ram)
+            Software.objects.create(user=bot, soft_name=get_software_name(cracker_version), type_of_software=hasher_type, soft_version=hasher_version,
+                                    soft_size=soft_size, soft_ram=soft_ram)
+
+            soft_size += 100
+            soft_ram += 10
+            cracker_version += 1
+            hasher_version += 1
 
 
